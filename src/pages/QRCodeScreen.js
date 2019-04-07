@@ -6,7 +6,6 @@ import {
     Button,
     Linking,
     TouchableOpacity,
-    Modal,
     TouchableHighlight,
     Alert,
 } from "react-native";
@@ -18,13 +17,12 @@ class QRCodeScreen extends Component {
 
     constructor(props){
         super(props);
-        this.state = {isShowingTag : true}
+        this.state = {isShowingTag : true, isShowingModal : false}
     };
 
     handleOnPress = () => this.setState({ isShowingTag: !this.state.isShowingTag })
 
-    onSuccess(e) {
-        <PopUp/>
+    static onSuccess(e) {
         // Linking
         //     .openURL(e.data)
         //     .catch(err => console.error('An error occurred', err));
@@ -33,11 +31,12 @@ class QRCodeScreen extends Component {
     render() {
         const tagView = <QRCode
             value={"this.state.text"}
-            size={200}
+            size={300}
             bgColor='#003399'
             fgColor='white'/>;
 
-        const scanView = <QRCodeScanner onRead={this.onSuccess.bind(this)}/>;
+        const scanView = <QRCodeScanner onRead={QRCodeScreen.onSuccess.bind(this)}/>;
+        const modalView = <PopUp text={"this.modalText"}/>;
 
         return (
             <View style={styles.screenContainer}>
@@ -46,7 +45,8 @@ class QRCodeScreen extends Component {
                 </View>
 
                 <View style={styles.QRContainer}>
-                    {this.state.isShowingTag ? tagView : scanView}
+                    {/*{this.state.isShowingTag ? tagView : scanView}*/}
+                    <PopUp/>
                 </View>
 
                 <View style={styles.PaddingContainer}>
@@ -60,43 +60,21 @@ class QRCodeScreen extends Component {
 
 class PopUp extends Component {
     state = {
-        popUpVisible: false,
+        isModalVisible: false,
     };
 
-    setModalVisible(visible) {
-        this.setState({popUpVisible: visible});
-    }
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
 
     render() {
         return (
-            <View style={{marginTop: 22}}>
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                    }}>
-                    <View style={{marginTop: 22}}>
-                        <View>
-                            <Text>Hello World!</Text>
-
-                            <TouchableHighlight
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.popUpVisible);
-                                }}>
-                                <Text>Hide Modal</Text>
-                            </TouchableHighlight>
-                        </View>
+            <View style={{ flex: 1 }}>
+                <Button title="TEST" onPress={this._toggleModal} />
+                <Modal isVisible={this.state.isModalVisible} onBackdropPress={this._toggleModal}>
+                    <View style={{ width:400, height: 400, backgroundColor:'#A7FFFF'}}>
+                        <Text>{this.props.text}</Text>
+                        <Button title="TEST" onPress={this._toggleModal}/>
                     </View>
                 </Modal>
-
-                <TouchableHighlight
-                    onPress={() => {
-                        this.setModalVisible(true);
-                    }}>
-                    <Text>Show Modal</Text>
-                </TouchableHighlight>
             </View>
         );
     }
