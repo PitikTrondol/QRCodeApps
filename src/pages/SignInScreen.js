@@ -6,8 +6,8 @@ import {Platform,
         Image,
         TouchableOpacity,
         Text,
-        AsyncStorage,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class SignInScreen extends Component {
     _signUp = ()=> {

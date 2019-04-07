@@ -7,11 +7,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.2.4",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.3",
+    "react-native-camera": "^2.2.1",
     "react-native-gesture-handler": "^1.1.0",
+    "react-native-modal": "^9.0.0",
     "react-native-qrcode": "^0.2.7",
+    "react-native-qrcode-scanner": "^1.1.2",
     "react-navigation": "^3.6.1"
   },
   "devDependencies": {
