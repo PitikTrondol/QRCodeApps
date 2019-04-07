@@ -20,6 +20,7 @@ class QRCodeScreen extends Component {
         this.state = {
             isShowingTag : true,
             isShowingModal : false,
+            popUpText : '',
             NameOfUser : this.props.navigation.state.params.NameOfUser
         }
     };
@@ -32,6 +33,10 @@ class QRCodeScreen extends Component {
         //     .catch(err => console.error('An error occurred', err));
     };
 
+    modalOnPress(e){
+        this.setState({ isShowingModal: true, popUpText: e.data })
+    }
+
     render() {
         const tagView = <QRCode
             value={this.state.NameOfUser}
@@ -39,18 +44,16 @@ class QRCodeScreen extends Component {
             bgColor='#003399'
             fgColor='white'/>;
 
-        const scanView = <QRCodeScanner onRead={QRCodeScreen.onSuccess.bind(this)}/>;
-        const modalView = <PopUp text={"this.modalText"}/>;
+        const scanView = <QRCodeScanner onRead={this.modalOnPress.bind(this)}/>;
+        const modalView = <PopUp text={"Hi "+this.state.popUpText}/>;
 
         return (
             <View style={styles.screenContainer}>
-                <View style={styles.PaddingContainer}>
-
-                </View>
+                <View style={styles.PaddingContainer}/>
 
                 <View style={styles.QRContainer}>
                     {this.state.isShowingTag ? tagView : scanView}
-                    {/*<PopUp/>*/}
+                    {this.state.isShowingModal ? modalView : null}
                 </View>
 
                 <View style={styles.PaddingContainer}>
@@ -64,7 +67,7 @@ class QRCodeScreen extends Component {
 
 class PopUp extends Component {
     state = {
-        isModalVisible: false,
+        isModalVisible: true,
     };
 
     _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
@@ -72,11 +75,10 @@ class PopUp extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Button title="TEST" onPress={this._toggleModal} />
                 <Modal isVisible={this.state.isModalVisible} onBackdropPress={this._toggleModal}>
                     <View style={{ width:400, height: 400, backgroundColor:'#A7FFFF'}}>
                         <Text>{this.props.text}</Text>
-                        <Button title="TEST" onPress={this._toggleModal}/>
+                        <Button title="DISMISS" onPress={this._toggleModal}/>
                     </View>
                 </Modal>
             </View>
