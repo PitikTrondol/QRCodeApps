@@ -3,12 +3,12 @@ import {View, Text} from "native-base";
 import {AsyncStorage, StyleSheet, TouchableOpacity, Button} from 'react-native';
 
 class HomeScreen extends Component {
-    static navigationOptions = {
-        title: 'Welcome to the app!',
-    };
+    // static navigationOptions = {
+    //     title: 'Welcome to the app!',
+    // };
 
     _showMoreApp = ()=>{
-
+        this.props.navigation.navigate('Main');
     }
 
     _signOutAsync= async ()=>{
@@ -20,10 +20,10 @@ class HomeScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style = {{marginTop:10, marginBottom: 10}}>
-                    <Button title="Show me more of the app" onPress={this._showMoreApp} />
+                    <Button title="Scan" onPress={this._showMoreApp} />
                 </View>
                 <View style = {{marginTop:10, marginBottom: 10}}>
-                    <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
+                    <Button title="Sign Out" onPress={this._signOutAsync} />
                 </View>
             </View>
         );

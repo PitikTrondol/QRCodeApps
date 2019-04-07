@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage, Button, StyleSheet, View} from "react-native";
+import {AsyncStorage, Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 class SignUpScreen extends Component {
 
@@ -11,7 +11,11 @@ class SignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Button title="No, it's not ready yet" onPress={this._signOutAsync} />
+                <TouchableOpacity onPress={this._signOutAsync}>
+                    <Text style={{color:'#003399', marginTop: 10, fontSize: 26}}>
+                        Not Ready
+                    </Text>
+                </TouchableOpacity>
             </View>
         );
     }

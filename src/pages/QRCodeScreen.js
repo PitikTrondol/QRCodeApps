@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from "react-native";
+import QRCode from 'react-native-qrcode';
 
 class QRCodeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-
+                <View style={{flex: 1, alignItems: 'center'}}></View>
+                <View style={styles.QRContainer}>
+                    <QRCode
+                        value={"this.state.text"}
+                        size={200}
+                        bgColor='#003399'
+                        fgColor='white'/>
+                </View>
+                <View style={{flex: 1, alignItems: 'center'}}></View>
             </View>
         );
     }
@@ -14,12 +23,13 @@ class QRCodeScreen extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:'#F2F2F2',
+        backgroundColor:'#003399',
     },
-    logoContainer:{
+    QRContainer:{
         alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
+        flex: 8,
+        justifyContent: 'center',
+        backgroundColor:'#F2F2F2',
     },
     logo:{
         position: 'absolute',
