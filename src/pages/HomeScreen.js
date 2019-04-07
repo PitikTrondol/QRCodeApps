@@ -8,8 +8,11 @@ class HomeScreen extends Component {
         title: 'Welcome to the app!',
     };
 
-    _showMoreApp = ()=>{
-        this.props.navigation.navigate('Main');
+    constructor(props){
+        super(props);
+        this.state = {
+            userDataInfo: this.props.navigation.state.params.userDataInfo,
+        };
     }
 
     _signOutAsync= async ()=>{
@@ -18,10 +21,13 @@ class HomeScreen extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
+        let concat = this.state.userDataInfo.first_name+' '+this.state.userDataInfo.last_name;
         return (
             <View style={styles.container}>
+                <Text> Hi {this.state.userDataInfo.first_name}</Text>
                 <View style = {{marginTop:10, marginBottom: 10}}>
-                    <Button title="Name Tag" onPress={this._showMoreApp} />
+                    <Button title="Name Tag" onPress={()=>navigate('Main',{NameOfUser: concat})} />
                 </View>
                 <View style = {{marginTop:10, marginBottom: 10}}>
                     <Button title="Sign Out" onPress={this._signOutAsync} />

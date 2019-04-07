@@ -17,7 +17,11 @@ class QRCodeScreen extends Component {
 
     constructor(props){
         super(props);
-        this.state = {isShowingTag : true, isShowingModal : false}
+        this.state = {
+            isShowingTag : true,
+            isShowingModal : false,
+            NameOfUser : this.props.navigation.state.params.NameOfUser
+        }
     };
 
     handleOnPress = () => this.setState({ isShowingTag: !this.state.isShowingTag })
@@ -30,7 +34,7 @@ class QRCodeScreen extends Component {
 
     render() {
         const tagView = <QRCode
-            value={"this.state.text"}
+            value={this.state.NameOfUser}
             size={300}
             bgColor='#003399'
             fgColor='white'/>;
@@ -45,8 +49,8 @@ class QRCodeScreen extends Component {
                 </View>
 
                 <View style={styles.QRContainer}>
-                    {/*{this.state.isShowingTag ? tagView : scanView}*/}
-                    <PopUp/>
+                    {this.state.isShowingTag ? tagView : scanView}
+                    {/*<PopUp/>*/}
                 </View>
 
                 <View style={styles.PaddingContainer}>

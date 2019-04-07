@@ -9,14 +9,53 @@ import {Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+export const userSatu = {
+    "id": 1,
+    "first_name": "Jeanette",
+    "last_name": "Penddreth",
+    "email": "jpenddreth0@census.gov",
+    "gender": "Female",
+    "username": "BerryGood",
+    "password": "BerryGood",
+    "ip_address": "26.58.193.2"
+};
+
+export const userDua = {
+    "id": 2,
+    "first_name": "Giavani",
+    "last_name": "Frediani",
+    "email": "gfrediani1@senate.gov",
+    "gender": "Male",
+    "username": "EverBefore",
+    "password": "EverBefore",
+    "ip_address": "229.179.4.212"
+};
+
 class SignInScreen extends Component {
+    constructor(props){
+        super(props);
+        this.state={username : '', password : '', dataIndex: ''}
+    }
+
     _signUp = ()=> {
         this.props.navigation.navigate('SignUp');
     }
 
     _asyncLogin = async ()=>{
-        await AsyncStorage.setItem('userToken', 'asdf');
-        this.props.navigation.navigate('Home');
+        const cond1 = (this.state.username === userSatu.username && this.state.password === userSatu.password);
+        const cond2 = (this.state.username === userDua.username && this.state.password === userDua.password);
+        if(cond1){
+            await AsyncStorage.setItem('userToken', 'user1');
+            this.props.navigation.navigate('Home', {userDataInfo : userSatu});
+        } else {
+            await AsyncStorage.setItem('userToken', 'user2');
+            this.props.navigation.navigate('Home', {userDataInfo : userDua});
+        }
+
+        if(cond1 || cond2)
+        {
+
+        }
     }
 
     render() {
@@ -31,24 +70,28 @@ class SignInScreen extends Component {
                     underlineColorAndroid='#003399'
                     placeholderTextColor='#003399'
                     keyboardType='email-address'
+                    onChangeText={(username) => this.setState({username})}
                     style={styles.inputField}/>
                 <TextInput
                     placeholder='password'
                     underlineColorAndroid='#003399'
                     placeholderTextColor='#003399'
+                    onChangeText={(password) => this.setState({password})}
                     secureTextEntry={true}
                     style={styles.inputField}/>
 
                 <TouchableOpacity onPress={this._asyncLogin}>
-                    <Text style={{color:'#003399', marginTop: 10}}>Login</Text>
+                    <Text style={{color:'#003399', marginTop: 10, fontSize: 23}}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this._signUp}>
-                    <Text style={{color:'#003399', marginTop: 10}}>SignUp</Text>
+                    <Text style={{color:'#003399', marginTop: 10, fontSize: 23}}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         );
     }
 }
+
+
 
 const styles = StyleSheet.create({
     inputField: {
