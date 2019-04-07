@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
         width: 280,
         color: '#003399',
         borderColor: '#003399',
-        marginTop: 5
+        marginTop: 5,
+        fontSize: 18,
     },
     Wrapper : {
         flex:1,

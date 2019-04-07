@@ -44,7 +44,9 @@ class QRCodeScreen extends Component {
             bgColor='#003399'
             fgColor='white'/>;
 
-        const scanView = <QRCodeScanner onRead={this.modalOnPress.bind(this)}/>;
+        const scanView = <QRCodeScanner
+            onRead={this.modalOnPress.bind(this)}
+        />;
         const modalView = <PopUp text={"Hi "+this.state.popUpText}/>;
 
         return (
@@ -76,9 +78,20 @@ class PopUp extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Modal isVisible={this.state.isModalVisible} onBackdropPress={this._toggleModal}>
-                    <View style={{ width:400, height: 400, backgroundColor:'#A7FFFF'}}>
-                        <Text>{this.props.text}</Text>
-                        <Button title="DISMISS" onPress={this._toggleModal}/>
+                    <View style={{
+                        width:400,
+                        height: 400,
+                        backgroundColor:'#D3D2FD',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <View style={{flex:2}}></View>
+                        <View style={{flex:6, alignItems: 'center', justifyContent: 'center',}}>
+                            <Text style={{fontSize: 28}}>{this.props.text}</Text>
+                        </View>
+                        <View style={{flex:2}}>
+                            <Button title="DISMISS" onPress={this._toggleModal}/>
+                        </View>
                     </View>
                 </Modal>
             </View>
@@ -89,7 +102,7 @@ class PopUp extends Component {
 const styles = StyleSheet.create({
     screenContainer:{
         flex: 1,
-        backgroundColor:'#003399',
+        backgroundColor:'#F2F2F2',
     },
     QRContainer:{
         flex: 6,

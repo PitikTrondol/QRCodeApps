@@ -25,11 +25,11 @@ class HomeScreen extends Component {
         let concat = this.state.userDataInfo.first_name+' '+this.state.userDataInfo.last_name;
         return (
             <View style={styles.container}>
-                <Text> Hi {this.state.userDataInfo.first_name}</Text>
-                <View style = {{marginTop:10, marginBottom: 10}}>
+                <Text style={{fontSize:24}}> Hi {this.state.userDataInfo.first_name}</Text>
+                <View style = {{marginTop:10, marginBottom: 10, fontSize:24}}>
                     <Button title="Name Tag" onPress={()=>navigate('Main',{NameOfUser: concat})} />
                 </View>
-                <View style = {{marginTop:10, marginBottom: 10}}>
+                <View style = {{marginTop:10, marginBottom: 10, fontSize:24}}>
                     <Button title="Sign Out" onPress={this._signOutAsync} />
                 </View>
             </View>
