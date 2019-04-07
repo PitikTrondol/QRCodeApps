@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, View} from "react-native";
 
-class Login extends Component {
+class QRCodeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image resizeMode="contain" style={styles.logo} source={require('../../asset/tag.png')}/>
-                </View>
+
             </View>
         );
     }
@@ -29,5 +27,4 @@ const styles = StyleSheet.create({
         height: 300
     }
 });
-
-export default Login;
+export default QRCodeScreen;
